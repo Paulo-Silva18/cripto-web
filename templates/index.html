@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Menu Principal{% endblock %}
+{% block content %}
+<h1>Implementação Web de Algoritmos Criptográficos</h1>
+<p class="subtitle">
+    Todos os algoritmos abaixo (DES e RSA) foram implementados manualmente,
+    do zero, sem o uso de bibliotecas de criptografia prontas.
+</p>
+
+<div class="cards">
+    <a href="{{ url_for('simetrico') }}" class="card">
+        <h2>Módulo Simétrico</h2>
+        <p>Cifra de bloco <strong>DES</strong> em modo CBC, com preenchimento
+        PKCS#7 manual. Cifre e decifre arquivos binários
+        (.jpg, .png, .pdf, etc.) e comprove a integridade do arquivo
+        recuperado.</p>
+        <span class="card-cta">Abrir módulo →</span>
+    </a>
+
+    <a href="{{ url_for('assimetrico') }}" class="card">
+        <h2>Módulo Assimétrico</h2>
+        <p>Protocolo <strong>RSA</strong> completo: geração manual de primos,
+        cálculo do totiente de Euler, Algoritmo de Euclides Estendido e
+        cifragem/decifragem de mensagens de texto com aritmética modular.</p>
+        <span class="card-cta">Abrir módulo →</span>
+    </a>
+</div>
+{% endblock %}

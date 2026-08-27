@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Módulo Assimétrico - RSA{% endblock %}
+{% block content %}
+<h1>Módulo Assimétrico — RSA</h1>
+<p class="subtitle">
+    Gere um par de chaves, cifre uma mensagem com a chave pública (e, n) e
+    decifre com a chave privada (d, n).
+</p>
+
+<section class="panel">
+    <h2>1. Gerar par de chaves</h2>
+    <form id="form-gerar-chaves" class="form-box">
+        <label>Tamanho da chave (bits)
+            <select name="bits">
+                <option value="128">128 bits (rápido, apenas didático)</option>
+                <option value="256" selected>256 bits (recomendado para a demo)</option>
+                <option value="512">512 bits (mais lento)</option>
+            </select>
+        </label>
+        <button type="submit">Gerar chaves</button>
+    </form>
+    <div id="resultado-chaves" class="key-result" hidden>
+        <p><strong>p</strong> (primo 1): <code id="out-p"></code></p>
+        <p><strong>q</strong> (primo 2): <code id="out-q"></code></p>
+        <p><strong>n</strong> = p × q: <code id="out-n"></code></p>
+        <p><strong>φ(n)</strong> = (p-1)(q-1): <code id="out-phi"></code></p>
+        <p><strong>Chave pública</strong> (e, n): <code id="out-e"></code>, <code id="out-n2"></code></p>
+        <p><strong>Chave privada</strong> (d, n): <code id="out-d"></code>, <code id="out-n3"></code></p>
+    </div>
+    <p id="status-gerar" class="status"></p>
+</section>
+
+<section class="panel">
+    <h2>2. Cifrar mensagem (chave pública)</h2>
+    <form id="form-cifrar-rsa" class="form-box">
+        <label>Mensagem
+            <input type="text" name="mensagem" placeholder="Digite uma mensagem" required>
+        </label>
+        <label>e (expoente público)
+            <input type="text" name="e" id="input-e" required>
+        </label>
+        <label>n (módulo)
+            <input type="text" name="n" id="input-n" required>
+        </label>
+        <button type="submit">Cifrar</button>
+    </form>
+    <p>Resultado (blocos cifrados, separados por vírgula):</p>
+    <textarea id="out-cifrado" rows="3" readonly></textarea>
+    <p id="status-cifrar-rsa" class="status"></p>
+</section>
+
+<section class="panel">
+    <h2>3. Decifrar mensagem (chave privada)</h2>
+    <form id="form-decifrar-rsa" class="form-box">
+        <label>Blocos cifrados (separados por vírgula)
+            <textarea name="cifrado" id="input-cifrado" rows="3" required></textarea>
+        </label>
+        <label>d (expoente privado)
+            <input type="text" name="d" id="input-d" required>
+        </label>
+        <label>n (módulo)
+            <input type="text" name="n" id="input-n2" required>
+        </label>
+        <button type="submit">Decifrar</button>
+    </form>
+    <p>Mensagem decifrada:</p>
+    <textarea id="out-decifrado" rows="2" readonly></textarea>
+    <p id="status-decifrar-rsa" class="status"></p>
+</section>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

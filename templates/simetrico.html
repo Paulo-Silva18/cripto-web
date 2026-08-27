@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Módulo Simétrico - DES{% endblock %}
+{% block content %}
+<h1>Módulo Simétrico — DES (CBC + PKCS#7)</h1>
+<p class="subtitle">
+    A chave informada é normalizada para 8 bytes (64 bits). O IV (vetor de
+    inicialização) é gerado aleatoriamente a cada cifragem e vai embutido
+    nos primeiros 8 bytes do arquivo cifrado.
+</p>
+
+<section class="panel">
+    <h2>1. Cifrar arquivo</h2>
+    <form id="form-cifrar" class="form-box">
+        <label>Chave secreta
+            <input type="text" name="chave" placeholder="Ex.: minhaChave123" required>
+        </label>
+        <label>Arquivo (.jpg, .png, .pdf, ou qualquer binário)
+            <input type="file" name="arquivo" required>
+        </label>
+        <button type="submit">Cifrar e baixar (.des)</button>
+    </form>
+    <p id="status-cifrar" class="status"></p>
+</section>
+
+<section class="panel">
+    <h2>2. Decifrar arquivo</h2>
+    <form id="form-decifrar" class="form-box">
+        <label>Chave secreta (a mesma usada para cifrar)
+            <input type="text" name="chave" placeholder="Ex.: minhaChave123" required>
+        </label>
+        <label>Arquivo cifrado (.des)
+            <input type="file" name="arquivo" required>
+        </label>
+        <button type="submit">Decifrar e baixar original</button>
+    </form>
+    <p id="status-decifrar" class="status"></p>
+</section>
+
+<section class="panel info">
+    <h2>Como comprovar a integridade</h2>
+    <ol>
+        <li>Selecione uma imagem (.jpg/.png) ou PDF e cifre-a com uma chave.</li>
+        <li>Baixe o arquivo <code>.des</code> gerado — repare que ele não abre
+            mais como imagem/PDF (está cifrado).</li>
+        <li>Envie esse mesmo arquivo <code>.des</code> no formulário de
+            decifrar, usando a <strong>mesma chave</strong>.</li>
+        <li>O arquivo original é reconstruído e deve abrir perfeitamente.</li>
+    </ol>
+</section>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}
