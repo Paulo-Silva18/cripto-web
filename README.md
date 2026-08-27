@@ -39,8 +39,8 @@ etc.):
 
 ```bash
 # 1. Clone o repositório
-git clone <URL-DO-REPOSITORIO>
-cd <NOME-DA-PASTA>
+git clone https://github.com/Paulo-Silva18/cripto-web.git
+cd cripto-web
 
 # 2. (Recomendado) crie um ambiente virtual
 python3 -m venv venv
